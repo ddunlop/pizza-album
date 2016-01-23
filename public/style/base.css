@@ -1,0 +1,82 @@
+
+body {
+  margin: 0;
+}
+
+ul {
+  width: 100%;
+  margin: -15px auto 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+li {
+  float: left;
+  padding: 0;
+  /*margin: 15px;*/
+}
+
+img {
+  width: 100%;
+  margin: 0;
+}
+
+h1 {
+  text-align: center;
+  font-size: 3em;
+  margin: 0.3em 0;
+}
+
+.emoji {
+  font-weight: normal;
+  font-family: "Apple Color Emoji","Segoe UI Emoji","NotoColorEmoji","Segoe UI Symbol","Android Emoji","EmojiSymbols";
+}
+
+footer {
+  clear: both;
+  padding: 3em 0;
+  text-align: center;
+  color: #ccc;
+  font-size: 0.7em;
+}
+
+@media (min-width: 400px) {
+  img {
+    width: 400px;
+  }
+}
+
+@media (min-width: 430px) {
+  ul {
+    width: 430px;
+  }
+  li {
+    margin: 15px;
+  }
+}
+
+@media (min-width: 600px) and (max-width: 859px) {
+  ul {
+    width: 100%;
+  }
+  li {
+    width: 48%;
+    margin: 1%;
+  }
+  img {
+    width: 100%;
+  }
+}
+
+@media (min-width: 860px) {
+  ul {
+    width: 860px;
+  }
+}
+
+@media (min-width: 1290px) {
+  ul {
+    width: 1290px;
+  }
+}
+

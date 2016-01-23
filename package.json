@@ -1,0 +1,22 @@
+{
+  "name": "pizza-album",
+  "version": "0.0.1",
+  "description": "Maintain a static webpage from an iOS photos album",
+  "main": "index.js",
+  "dependencies": {
+    "body-parser": "^1.14.2",
+    "express": "^4.13.4",
+    "gm": "^1.21.1",
+    "moment": "^2.11.1",
+    "mustache": "^2.2.1",
+    "q": "^1.4.1",
+    "request": "^2.67.0",
+    "uuid": "^2.0.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

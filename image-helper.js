@@ -16,9 +16,31 @@ function finalizeImage(tmpFile, filename) {
     size = 400,
     outputFile = 'public/photos/' + filename;
 
-  return Q.ninvoke(gm(tmpFile)
+  console.log('here!', tmpFile);
+
+  // gm(tmpFile).size(function(err, value) {
+  //   if(err) {
+  //     console.log('err: ', err);
+  //   }
+  //   console.log('callback - value:', value);
+  // })
+  return Q.ninvoke(gm(tmpFile), 'size')
+  .then(function(value) {
+    var minSide = Math.min(value.width, value.height),
+      offsetX = 0,
+      offsetY = 0;
+
+    if(value.width > value.height) {
+      offsetX = (value.width - value.height) / 2;
+    }
+    else {
+      offsetY = (value.height - value.width) / 2;
+    }
+
+    return Q.ninvoke(gm(tmpFile)
     .autoOrient()
-    .resize(size, size, '!')
+    .crop(minSide, minSide, offsetX, offsetY)
+    .resize(size, size)
     .stroke('#fff', strokeWidth)
     .fill('#ffff')
     .drawPolygon(
@@ -28,6 +50,7 @@ function finalizeImage(tmpFile, filename) {
       [offset + strokeWidth/2, size - offset - strokeWidth/2 - 1]
     ),
     'write', outputFile);
+  });
 }
 
 module.exports = {

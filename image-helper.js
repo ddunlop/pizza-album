@@ -14,17 +14,15 @@ function finalizeImage(tmpFile, filename) {
   var offset = 4,
     strokeWidth = 3,
     size = 400,
+    gImage,
+    largeOutputFile = 'public/photos/large/' + filename,
     outputFile = 'public/photos/' + filename;
 
-  console.log('here!', tmpFile);
+  console.log('generating from', tmpFile);
 
-  // gm(tmpFile).size(function(err, value) {
-  //   if(err) {
-  //     console.log('err: ', err);
-  //   }
-  //   console.log('callback - value:', value);
-  // })
-  return Q.ninvoke(gm(tmpFile), 'size')
+  gImage = gm(tmpFile);
+
+  return Q.ninvoke(gImage.autoOrient(), 'size')
   .then(function(value) {
     var minSide = Math.min(value.width, value.height),
       offsetX = 0,
@@ -37,19 +35,25 @@ function finalizeImage(tmpFile, filename) {
       offsetY = (value.height - value.width) / 2;
     }
 
-    return Q.ninvoke(gm(tmpFile)
-    .autoOrient()
-    .crop(minSide, minSide, offsetX, offsetY)
-    .resize(size, size)
-    .stroke('#fff', strokeWidth)
-    .fill('#ffff')
-    .drawPolygon(
-      [offset + strokeWidth/2, offset + strokeWidth/2],
-      [size - offset - strokeWidth/2 - 1, offset + strokeWidth/2],
-      [size - offset - strokeWidth/2 - 1, size - offset - strokeWidth/2 - 1],
-      [offset + strokeWidth/2, size - offset - strokeWidth/2 - 1]
-    ),
-    'write', outputFile);
+    gImage
+      .autoOrient()
+      .crop(minSide, minSide, offsetX, offsetY);
+
+    return Q.ninvoke(gImage, 'write', largeOutputFile).then(function() {
+      console.log('large image generated', largeOutputFile);
+      return Q.ninvoke(gImage
+        .autoOrient()
+        .crop(minSide, minSide, offsetX, offsetY)
+        .resize(size, size)
+        .stroke('#fff', strokeWidth)
+        .fill('#ffff')
+        .drawPolygon(
+          [offset + strokeWidth/2, offset + strokeWidth/2],
+          [size - offset - strokeWidth/2 - 1, offset + strokeWidth/2],
+          [size - offset - strokeWidth/2 - 1, size - offset - strokeWidth/2 - 1],
+          [offset + strokeWidth/2, size - offset - strokeWidth/2 - 1]
+        ), 'write', outputFile);
+    });
   });
 }
 

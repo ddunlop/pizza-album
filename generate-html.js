@@ -11,7 +11,7 @@ template = fs.readFileSync('templates/index.html').toString();
 function generateHtml() {
   return Q.nfcall(fs.readdir, 'public/photos').then(function(files) {
     var sortedFiles = files.filter(function(file) {
-        return file[0] !== '.';
+        return !(file[0] === '.' || file === 'large');
       }).sort().reverse(),
       html = Mustache.render(template, {
         files: sortedFiles,

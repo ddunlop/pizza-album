@@ -8,7 +8,11 @@
   <h1 class="emoji">🍕🍕🍕</h1>
   <ul>
     {{#files}}
-    <li><img src="photos/{{.}}"></li>
+    <li>
+      <a href="photos/large/{{.}}">
+        <img src="photos/{{.}}">
+      </a>
+    </li>
     {{/files}}
   </ul>
   <footer>© {{year}}</footer>

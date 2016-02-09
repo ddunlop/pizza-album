@@ -2,15 +2,15 @@
 <html>
 <head>
   <title>🍕🍕🍕</title>
-  <link rel="stylesheet" href="style/base.css">
+  <link rel="stylesheet" href="/style/base.css">
 </head>
 <body>
   <h1 class="emoji">🍕🍕🍕</h1>
-  <ul>
+  <ul class="grid">
     {{#files}}
     <li>
-      <a href="photos/large/{{.}}">
-        <img src="photos/{{.}}">
+      <a href="photos/{{imageHtml}}">
+        <img src="photos/{{image}}">
       </a>
     </li>
     {{/files}}

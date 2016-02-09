@@ -37,7 +37,8 @@ function finalizeImage(tmpFile, filename) {
 
     gImage
       .autoOrient()
-      .crop(minSide, minSide, offsetX, offsetY);
+      .crop(minSide, minSide, offsetX, offsetY)
+      .resize(size * 3, size * 3);
 
     return Q.ninvoke(gImage, 'write', largeOutputFile).then(function() {
       console.log('large image generated', largeOutputFile);
